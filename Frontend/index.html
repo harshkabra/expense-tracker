@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- =========================
+             HEADER
+        ========================== -->
+
+        <header class="header">
+
+            <div>
+                <p class="welcome-text">
+                    Personal Finance
+                </p>
+
+                <h1>
+                    Expense Tracker
+                </h1>
+
+                <p class="subtitle">
+                    Track and manage your expenses easily
+                </p>
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             SUMMARY CARDS
+        ========================== -->
+
+        <section class="summary-cards">
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    ₹
+                </div>
+
+                <div>
+                    <p>Total Expense</p>
+
+                    <h2 id="totalAmount">
+                        ₹0
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    #
+                </div>
+
+                <div>
+                    <p>Total Records</p>
+
+                    <h2 id="totalRecords">
+                        0
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="summary-card">
+
+                <div class="card-icon">
+                    C
+                </div>
+
+                <div>
+                    <p>Categories</p>
+
+                    <h2 id="totalCategories">
+                        0
+                    </h2>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             MAIN GRID
+        ========================== -->
+
+        <section class="main-grid">
+
+
+            <!-- =====================
+                 ADD EXPENSE
+            ====================== -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            RECORD
+                        </p>
+
+                        <h2>
+                            Add Expense
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <form id="expenseForm">
+
+                    <div class="form-group">
+
+                        <label for="expenseName">
+                            Expense Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expenseName"
+                            placeholder="e.g. Groceries"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="expenseAmount">
+                            Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            id="expenseAmount"
+                            placeholder="e.g. 500"
+                            min="1"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="expenseCategory">
+                            Category
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expenseCategory"
+                            placeholder="e.g. Food"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="expenseDate">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="expenseDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+                        + Add Expense
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- =====================
+                 SEARCH & SUMMARY
+            ====================== -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <p class="section-label">
+                            TOOLS
+                        </p>
+
+                        <h2>
+                            Search & Summary
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH -->
+
+                <div class="search-section">
+
+                    <label for="searchName">
+                        Search Expense
+                    </label>
+
+                    <div class="search-box">
+
+                        <input
+                            type="text"
+                            id="searchName"
+                            placeholder="Enter expense name"
+                        >
+
+                        <button
+                            class="secondary-btn"
+                            onclick="searchExpense()"
+                        >
+                            Search
+                        </button>
+
+                    </div>
+
+
+                    <button
+                        class="outline-btn full-btn"
+                        onclick="loadExpenses()"
+                    >
+                        Show All Expenses
+                    </button>
+
+                </div>
+
+
+                <!-- SUMMARY -->
+
+                <div class="summary-section">
+
+                    <label>
+                        Expense Summary
+                    </label>
+
+                    <div class="summary-buttons">
+
+                        <button
+                            class="secondary-btn"
+                            onclick="showTotalExpense()"
+                        >
+                            Total Expense
+                        </button>
+
+                        <button
+                            class="outline-btn"
+                            onclick="showCategoryWiseTotal()"
+                        >
+                            Category Totals
+                        </button>
+
+                    </div>
+
+                    <div
+                        id="summaryResult"
+                        class="summary-result"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             EXPENSE TABLE
+        ========================== -->
+
+        <section class="panel table-panel">
+
+            <div class="table-header">
+
+                <div>
+
+                    <p class="section-label">
+                        TRANSACTIONS
+                    </p>
+
+                    <h2>
+                        All Expenses
+                    </h2>
+
+                </div>
+
+
+                <button
+                    class="outline-btn"
+                    onclick="loadExpenses()"
+                >
+                    ↻ Refresh
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody
+                        id="expenseTableBody"
+                    >
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOOTER
+        ========================== -->
+
+        <footer class="footer">
+
+            <p>
+                Expense Tracker ·
+                Python · FastAPI · SQLite
+            </p>
+
+        </footer>
+
+    </div>
+
+</body>
+</html>

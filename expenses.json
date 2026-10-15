@@ -1,0 +1,20 @@
+[
+    {
+        "name":"Food",
+        "amount":250.0,
+        "category":"Food",
+        "date":1788739200000
+    },
+    {
+        "name":"Bus",
+        "amount":100.0,
+        "category":"Travel",
+        "date":1788739200000
+    },
+    {
+        "name":"food",
+        "amount":1500.0,
+        "category":"food",
+        "date":1788739200000
+    }
+]
